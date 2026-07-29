@@ -37,7 +37,7 @@ const Home = () => {
               View My Work
             </a>
             <a
-              href="/Pannala_Gayathri_Resume(2).pdf"
+              href="/Pannala_Gayathri.pdf"
               className="btn btn-resume"
               download
               target="_blank"
