@@ -1,0 +1,113 @@
+.skills {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  position: relative;
+}
+
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.skills-container.section-enter {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.skills-container.section-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-item {
+  background-color: var(--bg-primary);
+  padding: 1rem 1.2rem;
+  border-radius: 14px;
+  box-shadow: var(--shadow-md);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  min-height: 88px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.skill-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--gradient-primary);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-item:hover::before {
+  transform: scaleY(1);
+}
+
+.skill-item:hover {
+  transform: translateY(-4px) translateX(2px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary-light);
+}
+
+.skill-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.98rem;
+  margin-top: 0.55rem;
+  transition: color 0.2s;
+  letter-spacing: 0.01em;
+}
+
+.skill-item:hover .skill-name {
+  color: var(--primary);
+}
+
+.skill-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.skill-icon svg {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
+/* Remove unused bar and percentage/progress styles */
+/* No percentage, progress, or header. */
+
+@media (max-width: 768px) {
+  .skills-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .skill-item {
+    padding: 0.9rem 0.9rem;
+    min-height: 72px;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-container {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    max-width: 98vw;
+  }
+  .skill-item {
+    padding: 0.85rem 0.75rem;
+  }
+}
