@@ -18,24 +18,22 @@ const Contact = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    // In a real application, you would send this data to a backend
-    const handleSubmit = (e) => {
-      e.preventDefault();
-    
-      const mailtoLink = `mailto:gayathriravinderreddy@gmail.com
-        ?subject=Contact from ${encodeURIComponent(formData.name)}
-        &body=${encodeURIComponent(
-          `Email: ${formData.email}\n\nMessage:\n${formData.message}`
-        )}`;
-    
-      window.location.href = mailtoLink;
-    
-      setFormData({ name: '', email: '', message: '' });
-    };
-    
-    setFormData({ name: '', email: '', message: '' });
-  };
+  e.preventDefault();
+
+  const mailtoLink = `mailto:gayathriravinderreddy@gmail.com?subject=${encodeURIComponent(
+    `Contact from ${formData.name}`
+  )}&body=${encodeURIComponent(
+    `Email: ${formData.email}\n\nMessage:\n${formData.message}`
+  )}`;
+
+  window.location.href = mailtoLink;
+
+  setFormData({
+    name: '',
+    email: '',
+    message: '',
+  });
+};
 
   return (
     <section id="contact" className="contact" ref={ref}>
