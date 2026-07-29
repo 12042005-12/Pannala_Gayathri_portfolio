@@ -5,11 +5,13 @@ const useScrollAnimation = (options = {}) => {
   const ref = useRef(null);
 
   useEffect(() => {
+    const currentElement = ref.current;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          // Optional: stop observing after animation
+
           if (options.once !== false) {
             observer.unobserve(entry.target);
           }
@@ -23,40 +25,18 @@ const useScrollAnimation = (options = {}) => {
       }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    useEffect(() => {
-  const currentElement = ref.current;
-
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        setIsVisible(true);
-      }
-    },
-    {
-      threshold: 0.1,
-    }
-  );
-
-  if (currentElement) {
-    observer.observe(currentElement);
-  }
-
-  return () => {
     if (currentElement) {
-      observer.unobserve(currentElement);
+      observer.observe(currentElement);
     }
-  };
-}, [ref]);
+
+    return () => {
+      if (currentElement) {
+        observer.unobserve(currentElement);
+      }
+    };
   }, [options.threshold, options.rootMargin, options.once]);
 
   return [ref, isVisible];
 };
 
 export default useScrollAnimation;
-
-
-
