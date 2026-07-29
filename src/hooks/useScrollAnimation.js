@@ -7,6 +7,8 @@ const useScrollAnimation = (options = {}) => {
   useEffect(() => {
     const currentElement = ref.current;
 
+    if (!currentElement) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -25,14 +27,10 @@ const useScrollAnimation = (options = {}) => {
       }
     );
 
-    if (currentElement) {
-      observer.observe(currentElement);
-    }
+    observer.observe(currentElement);
 
     return () => {
-      if (currentElement) {
-        observer.unobserve(currentElement);
-      }
+      observer.unobserve(currentElement);
     };
   }, [options.threshold, options.rootMargin, options.once]);
 
