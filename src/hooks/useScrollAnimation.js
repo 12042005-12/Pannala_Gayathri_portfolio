@@ -27,11 +27,30 @@ const useScrollAnimation = (options = {}) => {
       observer.observe(ref.current);
     }
 
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+    useEffect(() => {
+  const currentElement = ref.current;
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        setIsVisible(true);
       }
-    };
+    },
+    {
+      threshold: 0.1,
+    }
+  );
+
+  if (currentElement) {
+    observer.observe(currentElement);
+  }
+
+  return () => {
+    if (currentElement) {
+      observer.unobserve(currentElement);
+    }
+  };
+}, [ref]);
   }, [options.threshold, options.rootMargin, options.once]);
 
   return [ref, isVisible];
